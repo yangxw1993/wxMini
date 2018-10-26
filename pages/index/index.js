@@ -34,6 +34,32 @@ Page({
     console.log(this.data.table);
     // this.getDB();
   },
+  onClick: function(e){
+    let dataType = e.currentTarget.dataset.type;
+    if(dataType === 'game'){
+      this.playGames(e)
+    }
+  },
+  playGames: function(e){
+    let table = this.data.table;
+    let curIndex = e.currentTarget.dataset.index;
+    let rowIndex = e.currentTarget.dataset.rowindex;
+    let curValue = e.currentTarget.dataset.value;
+    let leftValue = '', rightValue = '', topValue = '', bottomValue = '';
+    topValue = table[rowIndex-1][curIndex];
+    rightValue = table[rowIndex][curIndex+1];
+    bottomValue = table[rowIndex+1][curIndex];
+    leftValue = table[rowIndex][curIndex-1];
+
+    /*table.forEach( (rowItem, rowIdx) => {
+      if(rowIdx === rowIndex){
+        rowItem.forEach( (item, index) => {
+          lef
+        })
+      }
+    });*/
+    console.log(curValue, topValue, rightValue, bottomValue, leftValue);
+  },
   getDB: function(){
     wx.cloud.init({
       env: 'test'

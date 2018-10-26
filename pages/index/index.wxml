@@ -11,9 +11,14 @@
 <view>{{str}}</view>
 
 <view class="table">
-  <view class="table-row flex-between" wx:for="{{table}}" wx:for-item="tableRow" wx:key="tableRow">
-    <view class="table-item" wx:for="{{tableRow}}" wx:key="item">
-      {{item}}
+  <block wx:for="{{table}}" wx:for-item="tableRow" wx:for-index="rowIndex" wx:key="tableRow">
+    <view class="table-row flex-between">
+      <block wx:for="{{tableRow}}" wx:key="item">
+        <view class="table-item" data-type="game" data-rowIndex="{{rowIndex}}" data-index="{{index}}" data-value="{{item}}" bindtap="onClick">
+          {{item}}
+        </view>
+      </block>
     </view>
-  </view>
+  </block>
+
 </view>
