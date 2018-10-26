@@ -9,3 +9,11 @@
   <!-- <text class="code">{{item}}</text> -->
 </block>
 <view>{{str}}</view>
+
+<view class="table">
+  <view class="table-row flex-between" wx:for="{{table}}" wx:for-item="tableRow" wx:key="tableRow">
+    <view class="table-item" wx:for="{{tableRow}}" wx:key="item">
+      {{item}}
+    </view>
+  </view>
+</view>

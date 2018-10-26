@@ -35,7 +35,7 @@ App({
   },
   wxCloudInit: function(){
     wx.cloud.init({
-      env: 'test-x1dzi'
+      env: 'test'
     })
   },
   globalData: {

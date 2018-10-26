@@ -7,4 +7,20 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
+
+.flex-between{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

@@ -1,0 +1,13 @@
+$color : '#000';
+.table{
+  &-row{
+
+  }
+  &-item{
+    flex: 1;
+    height: 150rpx;
+    line-height: 150rpx;
+    text-align: center;
+    border: solid 1rpx #ccc;
+  }
+}
