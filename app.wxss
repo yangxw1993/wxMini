@@ -8,7 +8,10 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 }
-
+image{
+  display: block;
+  width: 100%;
+}
 .flex-between{
   display: flex;
   justify-content: flex-start;

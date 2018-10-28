@@ -26,8 +26,23 @@ const translateArray = (arr, num)=> {
   } else {
     return a;
   }
+};
+function arrayRandom(arr) {
+  arr.sort(function () {
+    return Math.random() - 0.5;
+  });
+}
+// 数组排序
+function compareArr(property) {
+  return function (obj1, obj2) {
+    let value1 = obj1[property];
+    let value2 = obj2[property];
+    return value2 - value1;
+  }
 }
 module.exports = {
   formatTime,
-  translateArray
+  translateArray,
+  arrayRandom,
+  compareArr
 }

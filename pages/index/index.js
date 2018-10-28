@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp();
-import { translateArray } from '../../utils/util'
+import { translateArray, arrayRandom, compareArr } from '../../utils/util'
 
 var order = [];
 let str = '';
@@ -17,11 +17,27 @@ for(let i = 0; i< 18; i++){
   let index = Math.round(Math.random() * 61) 
   str += order[index];
 }
-let table = [];
+let tableArr = [];
+// 定义红棋和黑棋
 for (let i = 0; i < 16; i++){
-  table.push(i)
+  let pieceItem = {
+    value: i,
+    color: 'red',
+    sort: parseInt(Math.random() * 40),
+    cover: false
+  };
+  if(i >= 8){
+    pieceItem.color = 'black';
+  }
+  tableArr.push(pieceItem)
 }
-
+// 将红旗和黑棋混合
+// 随机排列
+tableArr.sort(compareArr('sort'));
+const gamesObj = {
+  row: 4,
+  column: 4
+};
 Page({
   data: {
     toView: 'red',
@@ -30,7 +46,7 @@ Page({
     table: []
   },
   onLoad: function(){
-    this.setData({ order, str, table: translateArray(table, 4)});
+    this.setData({order, str, table: translateArray(JSON.parse(JSON.stringify(tableArr)), gamesObj.row)});
     console.log(this.data.table);
     // this.getDB();
   },
@@ -45,19 +61,39 @@ Page({
     let curIndex = e.currentTarget.dataset.index;
     let rowIndex = e.currentTarget.dataset.rowindex;
     let curValue = e.currentTarget.dataset.value;
-    let leftValue = '', rightValue = '', topValue = '', bottomValue = '';
-    topValue = table[rowIndex-1][curIndex];
-    rightValue = table[rowIndex][curIndex+1];
-    bottomValue = table[rowIndex+1][curIndex];
-    leftValue = table[rowIndex][curIndex-1];
+    let curColor = e.currentTarget.dataset.color;
+    let leftValue = null, rightValue = null, topValue = null, bottomValue = null;
+    // 行判断
+    if(rowIndex > 0){
+      topValue = table[rowIndex-1][curIndex]
+    }
+    if(rowIndex < table.length-1){
+      bottomValue = table[rowIndex+1][curIndex];
+    }
+    // 列判断
+    if(curIndex > 0){
+      leftValue = table[rowIndex][curIndex-1];
+    }
+    if(curIndex < gamesObj.row -1){
+      rightValue = table[rowIndex][curIndex+1];
+    }
 
-    /*table.forEach( (rowItem, rowIdx) => {
-      if(rowIdx === rowIndex){
-        rowItem.forEach( (item, index) => {
-          lef
-        })
+
+    tableArr.forEach(item => {
+      if(item.value === curValue && item.color === curColor){
+        item.arrowShow = true;
+        item.cover = true
+      }else{
+        item.arrowShow = false
       }
-    });*/
+      if(item.arrowShow){
+        item.topValue = topValue;
+        item.rightValue = rightValue;
+        item.bottomValue = bottomValue;
+        item.leftValue = leftValue
+      }
+    });
+    this.setData({table: translateArray(JSON.parse(JSON.stringify(tableArr)), gamesObj.row)})
     console.log(curValue, topValue, rightValue, bottomValue, leftValue);
   },
   getDB: function(){

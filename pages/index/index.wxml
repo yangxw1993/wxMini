@@ -14,8 +14,22 @@
   <block wx:for="{{table}}" wx:for-item="tableRow" wx:for-index="rowIndex" wx:key="tableRow">
     <view class="table-row flex-between">
       <block wx:for="{{tableRow}}" wx:key="item">
-        <view class="table-item" data-type="game" data-rowIndex="{{rowIndex}}" data-index="{{index}}" data-value="{{item}}" bindtap="onClick">
-          {{item}}
+        <view class="table-item" style="color: {{item.color}}" data-type="game" data-rowIndex="{{rowIndex}}" data-index="{{index}}" data-value="{{item.value}}" data-color="{{item.color}}" bindtap="onClick">
+          <view class="card">{{item.value}}</view>
+          <view class="arrow" wx:if="{{item.arrowShow}}">
+            <view class="arrow-item arrow-top" wx:if="{{item.topValue}}">
+              <image src="/images/arrow.png" mode="widthFix"></image>
+            </view>
+            <view class="arrow-item arrow-right" wx:if="{{item.rightValue}}">
+              <image src="/images/arrow.png" mode="widthFix"></image>
+            </view>
+            <view class="arrow-item arrow-bottom" wx:if="{{item.bottomValue}}">
+              <image src="/images/arrow.png" mode="widthFix"></image>
+            </view>
+            <view class="arrow-item arrow-left" wx:if="{{item.leftValue}}">
+              <image src="/images/arrow.png" mode="widthFix"></image>
+            </view>
+          </view>
         </view>
       </block>
     </view>
